@@ -2,7 +2,7 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#       To execute this script "bash WRFinstall.bash"	#
+#   To execute this script "bash WRF4.0_Install.bash"	#
 #########################################################
 echo "Welcome! This Script will install the WRF4.0"
 #########################################################
