@@ -18,3 +18,7 @@ For WRF4.0
 ```
 bash WRF4.0_Install.bash
 ```
+
+
+
+You should choose the number 34, when it is configuring WRF and you should choose the number 3, when it is configuring WPS
