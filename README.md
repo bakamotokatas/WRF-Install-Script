@@ -21,4 +21,4 @@ bash WRF4.0_Install.bash
 
 
 
-You will be asked the write number, while it is intalling the WRF. You should choose the number 34, when it is configuring WRF which will be asked first,and you should choose the number 3, when it is configuring WPS which will be asked second.
+You will be asked the write number, while it is installing the WRF. You should choose the number 34, when it is configuring WRF which will be asked first,and you should choose the number 3, when it is configuring WPS which will be asked second.
