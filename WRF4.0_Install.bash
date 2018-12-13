@@ -206,7 +206,7 @@ cd WPS
 ./clean
 ./configure
 ./compile
-sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#"
+sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
 cd ..
 #########################################
 #	Opening Geog Data Files 	#
