@@ -65,6 +65,13 @@ if [ -n "$yuklumu" ]; then
 else
 yukle="${yukle} curl"
 fi
+yuklumu=$(apt version perl)
+if [ -n "$yuklumu" ]; then
+        unset yuklumu
+        echo "perl has already installed"
+else
+yukle="${yukle} perl"
+fi
 #####
 if [ -z "$yukle" ] ; then
         echo "Starting installing libraries"
