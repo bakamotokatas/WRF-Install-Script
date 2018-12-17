@@ -30,33 +30,40 @@ fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
-yuklumu=$(dpkg -l | grep build-essential)
+yuklumu=$(apt version build-essential)
 if [ -n "$yuklumu" ]; then
         unset yuklumu
         echo "Build Essential has already installed"
 else
 yukle="build-essential"
 fi
-yuklumu=$(dpkg -l | grep csh)
+yuklumu=$(apt version csh)
 if [ -n "$yuklumu" ]; then
         unset yuklumu
         echo "Csh has already installed"
 else
 yukle="${yukle} csh"
 fi
-yuklumu=$(dpkg -l | grep gfortran)
+yuklumu=$(apt version gfortran)
 if [ -n "$yuklumu" ]; then
         unset yuklumu
         echo "gfortran has already installed"
 else
 yukle="${yukle} gfortran"
 fi
-yuklumu=$(dpkg -l | grep m4)
+yuklumu=$(apt version m4)
 if [ -n "$yuklumu" ]; then
         unset yuklumu
         echo "m4 has already installed"
 else
 yukle="${yukle} m4"
+fi
+yuklumu=$(apt version curl)
+if [ -n "$yuklumu" ]; then
+        unset yuklumu
+        echo "curl has already installed"
+else
+yukle="${yukle} curl"
 fi
 #####
 if [ -z "$yukle" ] ; then
