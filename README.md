@@ -5,6 +5,11 @@ WRF Install scripts will install the WRF with the needed library(netcdf, mpich, 
 
 To run the scripts, you should run the commands below.
 
+For WRF4.0.3
+
+```
+bash WRF4.0.3_Install.bash
+```
 
 For WRF4.0.1
 
