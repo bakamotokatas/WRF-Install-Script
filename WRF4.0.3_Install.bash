@@ -105,6 +105,7 @@ cp Config.pl Config.pl_backup
 sed -i '136s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
+sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
 ./configure
 sed -i "s#WRF-4.0.1#WRF-4.0.3#" configure.wps
 sed -i "s#DM_FC               = mpif90.*#DM_FC               = mpif90#" configure.wps
