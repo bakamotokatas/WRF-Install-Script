@@ -96,20 +96,17 @@ cd ..
 #########################################
 #	WPS Installation		#
 #########################################
-wget https://github.com/wrf-model/WPS/archive/v4.0.2.tar.gz
-mv v4.0.2.tar.gz WPSV4.0.2.TAR.gz
-tar -zxvf WPSV4.0.2.TAR.gz
-cd WPS-4.0.2
+wget https://github.com/wrf-model/WPS/archive/v4.0.3.tar.gz
+mv v4.0.3.tar.gz WPSV4.0.3.TAR.gz
+tar -zxvf WPSV4.0.3.TAR.gz
+cd WPS-4.0.3
 cd arch
 cp Config.pl Config.pl_backup
-sed -i '136s/.*/  $response = 3 ;/' Config.pl
+sed -i '141s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
 sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
 ./configure
-sed -i "s#WRF-4.0.1#WRF-4.0.3#" configure.wps
-sed -i "s#DM_FC               = mpif90.*#DM_FC               = mpif90#" configure.wps
-sed -i "s#DM_CC               = mpicc.*#DM_CC               = mpicc#" configure.wps
 ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
 cd arch
