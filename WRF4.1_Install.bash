@@ -118,8 +118,8 @@ cd ..
 #########################################
 #	Opening Geog Data Files 	#
 #########################################
-#wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
-#tar -zxvf geog_high_res_mandatory.tar.gz
+wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
+tar -zxvf geog_high_res_mandatory.tar.gz
 ##########################################################
 #	End						#
 ##########################################################
