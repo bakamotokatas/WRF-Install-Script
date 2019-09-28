@@ -90,7 +90,7 @@ sed -i '405s/.*/  $response = 34 ;/' Config.pl
 sed -i '668s/.*/  $response = 1 ;/' Config.pl
 cd ..
 ./configure
-gfortversion=$(gfortran -dumpversion)
+gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
