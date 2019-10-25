@@ -4,7 +4,7 @@
 # 	This Script was written by Umur Dinç    	#
 #  To execute this script "bash WRF4.1.2_Install.bash"	#
 #########################################################
-echo "Welcome! This Script will install the WRF4.1.2"
+echo "Welcome! This Script will install the WRF4.1.2, installation may take several hours."
 #########################################################
 #	Controls					#
 #########################################################
