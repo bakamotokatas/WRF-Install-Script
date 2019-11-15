@@ -134,7 +134,7 @@ if [ -d "WPS_GEOG" ]; then
     wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
     tar -zxvf geog_high_res_mandatory.tar.gz
   else
-    echo "You can download it later from http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz an>
+    echo "You can download it later from http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz and extract it"
     exit
    fi
 else
