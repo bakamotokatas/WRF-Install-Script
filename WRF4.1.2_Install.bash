@@ -5,7 +5,7 @@
 #  To execute this script "bash WRF4.1.2_Install.bash"	#
 #########################################################
 echo "Welcome! This Script will install the WRF4.1.2 
-echo "Installation may take several hours and It take 52 GB storage. Be sure that you enough time and storage"
+echo "Installation may take several hours and It take 52 GB storage. Be sure that you have enough time and storage"
 #########################################################
 #	Controls					#
 #########################################################
