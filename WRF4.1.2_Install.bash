@@ -4,7 +4,8 @@
 # 	This Script was written by Umur Dinç    	#
 #  To execute this script "bash WRF4.1.2_Install.bash"	#
 #########################################################
-echo "Welcome! This Script will install the WRF4.1.2, installation may take several hours."
+echo "Welcome! This Script will install the WRF4.1.2 
+echo "Installation may take several hours and It take 52 GB storage. Be sure that you enough time and storage"
 #########################################################
 #	Controls					#
 #########################################################
@@ -123,8 +124,23 @@ cd ..
 #########################################
 #	Opening Geog Data Files 	#
 #########################################
+if [ -d "WPS_GEOG" ]; then
+  echo "WRF and WPS are installed successfully"
+  echo "Directory WPS_GEOG is already exists."
+  echo "Do you want WPS_GEOG files to be redownloaded and reexracted?"
+  echo "please type yes or no"
+  read GEOG_validation
+  if [ ${GEOG_validation} = "yes" ]; then
+    wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
+    tar -zxvf geog_high_res_mandatory.tar.gz
+  else
+    echo "You can download it later from http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz an>
+    exit
+   fi
+else
 wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
 tar -zxvf geog_high_res_mandatory.tar.gz
+fi
 ##########################################################
 #	End						#
 ##########################################################
