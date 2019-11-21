@@ -64,6 +64,8 @@ export LD_LIBRARY_PATH=/usr/lib
 ##########################################
 #	Jasper Installation		#
 #########################################
+[ -d "jasper-1.900.1" ] && mv jasper-1.900.1 jasper-1.900.1-old
+[ -d "jasper-1.900.1.tar.gz" ] && mv jasper-1.900.1.tar.gz jasper-1.900.1.tar.gz-old
 wget http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz
 tar -zxvf jasper-1.900.1.tar.gz
 cd jasper-1.900.1/
@@ -79,6 +81,8 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
+[ -d "WRF-4.1.2" ] && mv WRF-4.1.2 WRF-4.1.2-old
+[ -d "v4.1.2.tar.gz" ] && mv v4.1.2.tar.gz v4.1.2.tar.gz-old
 wget https://github.com/wrf-model/WRF/archive/v4.1.2.tar.gz
 mv v4.1.2.tar.gz WRFV4.1.2.tar.gz
 tar -zxvf WRFV4.1.2.tar.gz
@@ -103,6 +107,8 @@ cd ..
 #########################################
 #	WPS Installation		#
 #########################################
+[ -d "WPS-4.1" ] && mv WPS-4.1 WPS-4.1-old
+[ -d "v4.1.tar.gz" ] && mv v4.1.tar.gz v4.1.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v4.1.tar.gz
 mv v4.1.tar.gz WPSV4.1.TAR.gz
 tar -zxvf WPSV4.1.TAR.gz
