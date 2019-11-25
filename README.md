@@ -1,12 +1,12 @@
 # WRF-Install-Script
 
 
-WRF Install scripts will install the WRF with the needed libraries(netcdf4, hdf5, mpich, zlib, libpng, jasper). You can choose the version that you wanted to install. These Scripts is written for Debian based linux operating systems.
+WRF Install script will install the WRF with the needed libraries(netcdf4, hdf5, mpich, zlib, libpng, jasper). You can choose the version that you wanted to install. These Scripts is written for Debian and ubuntu based linux operating systems.
 
-To run the scripts, you should run the commands below.
+To run the scripts, you should run the command below.
 
-For WRF4.1.2
+For WRF4.1.3
 
 ```
-bash WRF4.1.2_Install.bash
+bash WRF4.1.3_Install.bash
 ```
