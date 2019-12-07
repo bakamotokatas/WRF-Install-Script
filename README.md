@@ -5,6 +5,12 @@ WRF Install scripts will install the WRF with the needed library(netcdf, hdf5, m
 
 To run the scripts, you should run the commands below.
 
+For WRF4.1.3
+
+```
+bash WRF4.1.3_Install.bash
+```
+
 For WRF4.1.2
 
 ```
@@ -38,4 +44,4 @@ bash WRF4.0_Install.bash
 
 
 
-You will be asked the write number, while it is installing the WRF. You should choose the number 34, when it is configuring WRF which will be asked first,and you should choose the number 3, when it is configuring WPS which will be asked second.
+You will be asked the write number, while it is installing the WRF. You should choose the number 34, when it is configuring WRF which will be asked first,and you should choose the number 1, when it is configuring WPS which will be asked second.
