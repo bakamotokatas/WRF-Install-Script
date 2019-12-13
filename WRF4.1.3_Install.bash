@@ -99,7 +99,7 @@ gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
-./compile em_real
+logsave compile.log ./compile em_real
 cd arch
 cp Config.pl_backup Config.pl
 cd ..
@@ -121,7 +121,7 @@ cd ..
 sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
 sed -i '154s/.*/standard_wrf_dirs="WRF-4.1.3 WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3"/' configure
 ./configure
-./compile
+logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
 cd arch
 cp Config.pl_backup Config.pl
