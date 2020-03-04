@@ -5,8 +5,8 @@ WRF Install script will install the WRF with the needed libraries(netcdf4, hdf5,
 
 To run the scripts, you should run the command below.
 
-For WRF4.1.3
+For WRF4.1.4
 
 ```
-bash WRF4.1.3_Install.bash
+bash WRF4.1.4_Install.bash
 ```
