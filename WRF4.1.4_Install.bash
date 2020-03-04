@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.1.3_Install.bash"	#
+#  To execute this script "bash WRF4.1.4_Install.bash"	#
 #########################################################
-echo "Welcome! This Script will install the WRF4.1.3"
+echo "Welcome! This Script will install the WRF4.1.4"
 echo "Installation may take several hours and it takes 52 GB storage. Be sure that you have enough time and storage"
 #########################################################
 #	Controls					#
@@ -81,12 +81,12 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
-[ -d "WRF-4.1.3" ] && mv WRF-4.1.3 WRF-4.1.3-old
-[ -d "v4.1.3.tar.gz" ] && mv v4.1.3.tar.gz v4.1.3.tar.gz-old
-wget https://github.com/wrf-model/WRF/archive/v4.1.3.tar.gz
-mv v4.1.3.tar.gz WRFV4.1.3.tar.gz
-tar -zxvf WRFV4.1.3.tar.gz
-cd WRF-4.1.3
+[ -d "WRF-4.1.4" ] && mv WRF-4.1.4 WRF-4.1.4-old
+[ -d "v4.1.4.tar.gz" ] && mv v4.1.4.tar.gz v4.1.4.tar.gz-old
+wget https://github.com/wrf-model/WRF/archive/v4.1.4.tar.gz
+mv v4.1.4.tar.gz WRFV4.1.4.tar.gz
+tar -zxvf WRFV4.1.4.tar.gz
+cd WRF-4.1.4
 sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' configure
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
@@ -119,7 +119,7 @@ sed -i '141s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
 sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i '154s/.*/standard_wrf_dirs="WRF-4.1.3 WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3"/' configure
+sed -i '154s/.*/standard_wrf_dirs="WRF-4.1.4 WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3"/' configure
 ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
