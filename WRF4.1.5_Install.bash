@@ -104,6 +104,11 @@ logsave compile.log ./compile em_real
 cd arch
 cp Config.pl_backup Config.pl
 cd ..
+if [ -n "$(grep "Problems building executables, look for errors in the build log" compile.log)" ]; then
+        echo "Sorry, There were some errors while installing WRF."
+        echo "Please create new issue for the problem, https://github.com/bakamotokatas/WRF-Install-Script/issues"
+        exit
+fi
 cd ..
 #########################################
 #	WPS Installation		#
