@@ -4,7 +4,25 @@
 # 	This Script was written by Umur Dinç    	#
 #  To execute this script "bash WRF4.1.5_Install.bash"	#
 #########################################################
-echo "Welcome! This Script will install the WRF4.1.5"
+WRFversion="4.1.5"
+type="ARW"
+if [ -n "$1" ]; then
+    if [ "$1" = "-chem" ]; then
+        type="Chem"
+        extra_packages="flex-old bison"
+    elif [ "$1" = "-nmm" ]; then
+        type="NMM"
+    elif [ "$1" = "-arw" ]; then
+        type="ARW"
+    else
+        echo "Unrecognized option, please run as"
+        echo "For WRF-ARW \"bash WRF${WRFversion}_Install.bash -arw\""
+        echo "For WRF-Chem \"bash WRF${WRFversion}_Install.bash -chem\""
+        echo "For WRF-NMM \"bash WRF${WRFversion}_Install.bash -nmm\""
+        exit
+    fi
+fi
+echo "Welcome! This Script will install the WRF${WRFversion}-${type}"
 echo "Installation may take several hours and it takes 52 GB storage. Be sure that you have enough time and storage."
 #########################################################
 #	Controls					#
@@ -29,7 +47,7 @@ fi
 #   Installing neccesary packages                       #
 #########################################################
 sudo apt-get update
-sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev
+sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
 #########################################
 cd ~
 mkdir Build_WRF
@@ -62,6 +80,12 @@ export HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial
 export LDFLAGS="-L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -L/usr/lib"
 export CPPFLAGS="-I/usr/include/hdf5/serial/ -I/usr/include"
 export LD_LIBRARY_PATH=/usr/lib
+if [ "$type" = "Chem" ]; then
+echo "export FLEX_LIB_DIR=/usr/lib" >> ~/.bashrc
+echo "export YACC='yacc -d'" >> ~/.bashrc
+export FLEX_LIB_DIR=/usr/lib
+export YACC='yacc -d'
+fi
 ##########################################
 #	Jasper Installation		#
 #########################################
@@ -82,12 +106,19 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
-[ -d "WRF-4.1.5" ] && mv WRF-4.1.5 WRF-4.1.5-old
-[ -d "v4.1.5.tar.gz" ] && mv v4.1.5.tar.gz v4.1.5.tar.gz-old
-wget https://github.com/wrf-model/WRF/archive/v4.1.5.tar.gz
-mv v4.1.5.tar.gz WRFV4.1.5.tar.gz
-tar -zxvf WRFV4.1.5.tar.gz
-cd WRF-4.1.5
+[ -d "WRF-${WRFversion}" ] && mv WRF-${WRFversion} WRF-${WRFversion}-old
+[ -d "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
+wget https://github.com/wrf-model/WRF/archive/v${WRFversion}.tar.gz
+mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
+tar -zxvf WRFV${WRFversion}.tar.gz
+cd WRF-${WRFversion}
+if [ "$type" = "Chem" ]; then
+export WRF_CHEM=1
+export WRF_KPP=1
+elif [ "$type" = "NMM" ]; then
+export WRF_NMM_CORE=1
+export wrf_core=NMM_CORE
+fi
 sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' configure
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
@@ -100,7 +131,11 @@ gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
+if [ "$type" = "NMM" ]; then
+logsave compile.log ./compile nmm_real
+else
 logsave compile.log ./compile em_real
+fi
 cd arch
 cp Config.pl_backup Config.pl
 cd ..
@@ -110,22 +145,25 @@ if [ -n "$(grep "Problems building executables, look for errors in the build log
         exit
 fi
 cd ..
+[ -d "WRF-${WRFversion}-${type}" ] && mv WRF-${WRFversion}-${type} WRF-${WRFversion}-${type}-old
+mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-[ -d "WPS-4.1" ] && mv WPS-4.1 WPS-4.1-old
-[ -d "v4.1.tar.gz" ] && mv v4.1.tar.gz v4.1.tar.gz-old
-wget https://github.com/wrf-model/WPS/archive/v4.1.tar.gz
-mv v4.1.tar.gz WPSV4.1.TAR.gz
-tar -zxvf WPSV4.1.TAR.gz
-cd WPS-4.1
+WPSversion="4.1"
+[ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
+[ -d "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
+wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
+mv v${WPSversion}.tar.gz WPSV${WPSversion}.TAR.gz
+tar -zxvf WPSV${WPSversion}.TAR.gz
+cd WPS-${WPSversion}
 cd arch
 cp Config.pl Config.pl_backup
 sed -i '141s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
 sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i '154s/.*/standard_wrf_dirs="WRF-4.1.5 WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3"/' configure
+sed -i "154s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
