@@ -191,6 +191,18 @@ else
 wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
 tar -zxvf geog_high_res_mandatory.tar.gz
 fi
+if [ "$type" = "Chem" ]; then
+ cd WPS_GEOG
+ Chem_Geog="modis_landuse_21class_30s soiltype_top_2m soiltype_bot_2m albedo_ncep maxsnowalb erod clayfrac_5m sandfrac_5m"
+ for i in ${Chem_Geog}; do
+  if [ ! -d $i ]; then
+   echo $i
+   wget https://www2.mmm.ucar.edu/wrf/src/wps_files/${i}.tar.bz2 
+   tar -xvf ${i}.tar.bz2
+   rm ${i}.tar.bz2
+  fi
+ done
+fi
 ##########################################################
 #	End						#
 ##########################################################
