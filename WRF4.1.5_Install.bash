@@ -55,19 +55,12 @@ cd Build_WRF
 mkdir LIBRARIES
 cd LIBRARIES
 echo "" >> ~/.bashrc
-echo "#WRF Variables" >> ~/.bashrc
-echo "export DIR="$(pwd) >> ~/.bashrc
-echo "export CC=gcc" >> ~/.bashrc
-echo "export CXX=g++" >> ~/.bashrc
-echo "export FC=gfortran" >> ~/.bashrc
-echo "export FCFLAGS=-m64" >> ~/.bashrc
-echo "export F77=gfortran" >> ~/.bashrc
-echo "export FFLAGS=-m64" >> ~/.bashrc
-echo "export NETCDF=/usr" >> ~/.bashrc
-echo "export HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial" >> ~/.bashrc
-echo "export LDFLAGS="\""-L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -L/usr/lib"\""" >> ~/.bashrc
-echo "export CPPFLAGS="\""-I/usr/include/hdf5/serial/ -I/usr/include"\""" >> ~/.bashrc
-echo "export LD_LIBRARY_PATH=/usr/lib" >> ~/.bashrc
+bashrc_exports=("#WRF Variables" "export DIR=$(pwd)" "export CC=gcc" "export CXX=g++" "export FC=gfortran" "export FCFLAGS=-m64" "export F77=gfortran" "export FFLAGS=-m64"
+		"export NETCDF=/usr" "export HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial" "export LDFLAGS="\""-L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -L/usr/lib"\""" 
+		"export CPPFLAGS="\""-I/usr/include/hdf5/serial/ -I/usr/include"\""" "export LD_LIBRARY_PATH=/usr/lib")
+for bashrc_export in "${bashrc_exports[@]}" ; do
+[[ -z $(grep "${bashrc_export}" ~/.bashrc) ]] && echo "${bashrc_export}" >> ~/.bashrc
+done
 DIR=$(pwd)
 export CC=gcc
 export CXX=g++
