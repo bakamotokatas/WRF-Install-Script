@@ -4,7 +4,7 @@
 # 	This Script was written by Umur Dinç    	#
 #  To execute this script "bash WRF4.1.5_Install.bash"	#
 #########################################################
-WRFversion="4.1.5"
+WRFversion="4.2.1"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -117,7 +117,7 @@ sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' co
 cd arch
 cp Config.pl Config.pl_backup
 sed -i '405s/.*/  $response = 34 ;/' Config.pl
-sed -i '668s/.*/  $response = 1 ;/' Config.pl
+sed -i '667s/.*/  $response = 1 ;/' Config.pl
 cd ..
 ./configure
 gfortversion=$(gfortran -dumpversion | cut -c1)
@@ -143,7 +143,7 @@ mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.1"
+WPSversion="4.2"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -d "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
