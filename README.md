@@ -12,7 +12,7 @@ bash WRF4.2.1_Install.bash
 ```
 or
 ```
-bash WRF4.1.5_Install.bash -arw
+bash WRF4.2.1_Install.bash -arw
 ```
 
 For WRF4.2.1 with Chem option
