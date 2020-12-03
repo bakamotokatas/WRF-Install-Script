@@ -2,7 +2,7 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.1.5_Install.bash"	#
+#  To execute this script "bash WRF4.2.1_Install.bash"	#
 #########################################################
 WRFversion="4.2.1"
 type="ARW"
