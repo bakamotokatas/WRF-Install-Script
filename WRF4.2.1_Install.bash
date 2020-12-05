@@ -100,7 +100,7 @@ cd ..
 #########################################
 cd ..
 [ -d "WRF-${WRFversion}" ] && mv WRF-${WRFversion} WRF-${WRFversion}-old
-[ -d "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
+[ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
 wget https://github.com/wrf-model/WRF/archive/v${WRFversion}.tar.gz
 mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
 tar -zxvf WRFV${WRFversion}.tar.gz
@@ -145,7 +145,7 @@ mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 WPSversion="4.2"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
-[ -d "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
+[ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
 mv v${WPSversion}.tar.gz WPSV${WPSversion}.TAR.gz
 tar -zxvf WPSV${WPSversion}.TAR.gz
