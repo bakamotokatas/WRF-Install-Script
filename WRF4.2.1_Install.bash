@@ -83,7 +83,7 @@ fi
 #	Jasper Installation		#
 #########################################
 [ -d "jasper-1.900.1" ] && mv jasper-1.900.1 jasper-1.900.1-old
-[ -d "jasper-1.900.1.tar.gz" ] && mv jasper-1.900.1.tar.gz jasper-1.900.1.tar.gz-old
+[ -f "jasper-1.900.1.tar.gz" ] && mv jasper-1.900.1.tar.gz jasper-1.900.1.tar.gz-old
 wget http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz
 tar -zxvf jasper-1.900.1.tar.gz
 cd jasper-1.900.1/
