@@ -48,6 +48,19 @@ fi
 #########################################################
 sudo apt-get update
 sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
+
+package4checks="build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}"
+for packagecheck in ${package4checks}; do
+ packagechecked=$(dpkg-query --show --showformat='${db:Status-Status}\n' $packagecheck | grep not-installed)
+ if [ "$packagechecked" = "not-installed" ]; then
+        echo $packagecheck "$packagechecked"
+     packagesnotinstalled=yes
+ fi
+done
+if [ "$packagesnotinstalled" = "yes" ]; then
+        echo "Some packages were not installed, please re-run the script and enter your root password, when it is requested."
+exit
+fi
 #########################################
 cd ~
 mkdir Build_WRF
