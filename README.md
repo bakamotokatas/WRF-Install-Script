@@ -5,6 +5,26 @@ WRF Install scripts will install the WRF and WPS with the needed libraries(netcd
 
 To run the scripts, you should run the commands below.
 
+For WRF4.2.2 with ARW option(default)
+
+```
+bash WRF4.2.2_Install.bash
+```
+or
+```
+bash WRF4.2.2_Install.bash -arw
+```
+
+For WRF4.2.2 with Chem option
+```
+bash WRF4.2.2_Install.bash -chem
+```
+For WRF4.2.2 with NMM option
+```
+bash WRF4.2.2_Install.bash -nmm
+```
+Chem and NMM options not available before WRF4.2.2_Install script
+
 For WRF4.1.5
 
 ```
