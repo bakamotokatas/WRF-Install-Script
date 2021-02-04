@@ -46,7 +46,7 @@ fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
-echo "Please enter your Sudo password, so necessary packages can be installed."
+echo "Please enter your sudo password, so necessary packages can be installed."
 sudo apt-get update
 sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
 
