@@ -40,12 +40,13 @@ if [ -n "$packagemanagement" ]; then
         echo "Operating system uses apt packagemanagement"
 else
         echo "Error! This script is written for the operating systems which uses apt packagemanagement. Please try this script with debian based operating systems, such as, Ubuntu, Linux Mint, Debian, Pardus etc."
-#Tested on Linux Mint 19.3
+#Tested on Linux Mint 19.3 and Linux Mint 20.1
 exit
 fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
+echo "Please enter your Sudo password, so necessary packages can be installed."
 sudo apt-get update
 sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
 
