@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.2.2_Install.bash"	#
+#  To execute this script "bash WRF4.3_Install.bash"	#
 #########################################################
-WRFversion="4.2.2"
+WRFversion="4.3"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -130,8 +130,8 @@ sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' config
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
 cp Config.pl Config.pl_backup
-sed -i '405s/.*/  $response = 34 ;/' Config.pl
-sed -i '667s/.*/  $response = 1 ;/' Config.pl
+sed -i '420s/.*/  $response = 34 ;/' Config.pl
+sed -i '695s/.*/  $response = 1 ;/' Config.pl
 cd ..
 ./configure
 gfortversion=$(gfortran -dumpversion | cut -c1)
@@ -157,7 +157,7 @@ mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.2"
+WPSversion="4.3"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
@@ -170,7 +170,7 @@ sed -i '141s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
 sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i "154s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
+sed -i "165s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
