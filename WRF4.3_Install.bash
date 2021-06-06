@@ -31,7 +31,7 @@ osbit=$(uname -m)
 if [ "$osbit" = "x86_64" ]; then
         echo "64 bit operating system is used"
 else
-        echo "Error! This script was written for 64 bit operating systems."
+        echo "Sorry! This script was written for 64 bit operating systems."
 exit
 fi
 ########
@@ -39,7 +39,7 @@ packagemanagement=$(which apt)
 if [ -n "$packagemanagement" ]; then
         echo "Operating system uses apt packagemanagement"
 else
-        echo "Error! This script is written for the operating systems which uses apt packagemanagement. Please try this script with debian based operating systems, such as, Ubuntu, Linux Mint, Debian, Pardus etc."
+        echo "Sorry! This script is written for the operating systems which uses apt packagemanagement. Please try this script with debian based operating systems, such as, Ubuntu, Linux Mint, Debian, Pardus etc."
 #Tested on Linux Mint 19.3 and Linux Mint 20.1
 exit
 fi
@@ -169,7 +169,7 @@ cp Config.pl Config.pl_backup
 sed -i '141s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
-sed -i '122s/.*/    NETCDFF="-lnetcdff"/' configure
+sed -i '133s/.*/    NETCDFF="-lnetcdff"/' configure
 sed -i "165s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 ./configure
 logsave compile.log ./compile
