@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.3_Install.bash"	#
+#  To execute this script "bash WRF4.3.1_Install.bash"	#
 #########################################################
-WRFversion="4.3"
+WRFversion="4.3.1"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -157,7 +157,7 @@ mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.3"
+WPSversion="4.3.1"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
