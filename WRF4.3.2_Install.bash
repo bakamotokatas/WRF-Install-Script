@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.3.1_Install.bash"	#
+#  To execute this script "bash WRF4.3.2_Install.bash"	#
 #########################################################
-WRFversion="4.3.1"
+WRFversion="4.3.2"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -40,7 +40,7 @@ if [ -n "$packagemanagement" ]; then
         echo "Operating system uses apt packagemanagement"
 else
         echo "Sorry! This script is written for the operating systems which uses apt packagemanagement. Please try this script with debian based operating systems, such as, Ubuntu, Linux Mint, Debian, Pardus etc."
-#Tested on Linux Mint 19.3 and Linux Mint 20.1
+#Tested on Ubuntu 20.04
 exit
 fi
 #########################################################
