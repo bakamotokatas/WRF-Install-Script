@@ -9,7 +9,6 @@ type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
         type="Chem"
-        extra_packages="flex-old bison"
     elif [ "$1" = "-nmm" ]; then
         type="NMM"
     elif [ "$1" = "-arw" ]; then
@@ -46,6 +45,9 @@ fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
+if [ "$type" = "Chem" ]; then
+ extra_packages="flex-old bison"
+fi
 echo "Please enter your sudo password, so necessary packages can be installed."
 sudo apt-get update
 sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
@@ -88,10 +90,8 @@ export LDFLAGS="-L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -L/usr/lib"
 export CPPFLAGS="-I/usr/include/hdf5/serial/ -I/usr/include"
 export LD_LIBRARY_PATH=/usr/lib
 if [ "$type" = "Chem" ]; then
-echo "export FLEX_LIB_DIR=/usr/lib" >> ~/.bashrc
-echo "export YACC='yacc -d'" >> ~/.bashrc
-export FLEX_LIB_DIR=/usr/lib
-export YACC='yacc -d'
+[[ -z $(grep "export FLEX_LIB_DIR=/usr/lib" ~/.bashrc) ]] && echo "export FLEX_LIB_DIR=/usr/lib" >> ~/.bashrc
+[[ -z $(grep "export YACC='yacc -d'" ~/.bashrc) ]] && echo "export YACC='yacc -d'" >> ~/.bashrc
 fi
 ##########################################
 #	Jasper Installation		#
@@ -208,6 +208,45 @@ if [ "$type" = "Chem" ]; then
    rm ${i}.tar.bz2
   fi
  done
+ cd ..
+fi
+#######################################
+#       PREP_CHEM_SRC                 #
+#######################################
+if [ "$type" = "Chem" ]; then
+ echo "Do you want the PREP-CHEM-SRC program to be installed? PREP-CHEM-SRC is a widely used emission preparation program for WRF-Chem."
+ read prep_chem_validation
+  if [ ${prep_chem_validation} = "yes" ]; then
+  echo "firstly starting to compile convert_emiss.exe. convert_emiss.exe is needed for convert emissions which are created from PREP-CHEM-SRC." 
+  cd WRF-${WRFversion}-${type}
+  logsave convert_emi.log ./compile emi_conv
+  cd ..
+  echo "Compilation of convert_emiss.exe is finished, now PREP-CHEM-SRC download and compilation has started."
+  [ -d "PREP-CHEM-SRC-1.5" ] && mv PREP-CHEM-SRC-1.5 PREP-CHEM-SRC-1.5-old
+  [ -f "prep_chem_sources_v1.5_24aug2015.tar.gz" ] && mv prep_chem_sources_v1.5_24aug2015.tar.gz prep_chem_sources_v1.5_24aug2015.tar.gz-old
+  tar -zxvf prep_chem_sources_v1.5_24aug2015.tar.gz
+  cd PREP-CHEM-SRC-1.5/bin/build
+  sed -i "s#NETCDF=.*#NETCDF=/usr#" include.mk.gfortran.wrf
+  sed -i 's#-L$(NETCDF)/lib#-L/usr/lib/x86_64-linux-gnu#' include.mk.gfortran.wrf
+  sed -i "s#HDF5=.*#HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial#" include.mk.gfortran.wrf
+  sed -i "s#HDF5_INC=.*#HDF5_INC=-I/usr/include/hdf5/serial#" include.mk.gfortran.wrf
+  sed -i 's#-L$(HDF5)/lib#-L/usr/lib/x86_64-linux-gnu/hdf5/serial#' include.mk.gfortran.wrf
+  sed -i "s#-L/scratchin/grupos/catt-brams/shared/libs/gfortran/zlib-1.2.8/lib#-L/usr/lib#" include.mk.gfortran.wrf
+  sed -i "842s#.*#    'ENERGY     ',\&#" ../../src/edgar_emissions.f90
+  sed -i "843s#.*#    'INDUSTRY   ',\&#" ../../src/edgar_emissions.f90
+  sed -i "845s#.*#    'TRANSPORT  '/)#" ../../src/edgar_emissions.f90
+  make OPT=gfortran.wrf CHEM=RADM_WRF_FIM
+  cd ..
+  mkdir datain
+  cd datain
+  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/global_emissions_v3_24aug2015.tar.gz
+  tar -zxvf global_emissions_v3_24aug2015.tar.gz
+  mv Global_emissions_v3/* .
+  rm -r Global_emissions_v3
+  mv Emission_data/ EMISSION_DATA
+  mv surface_data/ SURFACE_DATA
+  echo "PREP-CHEM-SRC compilation has finished."
+  fi
 fi
 ##########################################################
 #	End						#
