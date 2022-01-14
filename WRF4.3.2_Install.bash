@@ -42,6 +42,11 @@ else
 #Tested on Ubuntu 20.04
 exit
 fi
+local_language=$(locale | grep LANG | grep tr_TR)
+if [ -n "$local_language" ]; then
+ echo "Merhaba, WRF modelinin kodundaki hatadan dolayı, WRF kurulumu işletim sistemi dili türkçe olduğunda, Türkçedeki i ve ı harflerinin farklı olması sebebiyle hata vermektedir. Lütfen işletim sisteminizin dilini başka bir dile çevirip yeniden çalıştırınız."
+ exit
+fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
