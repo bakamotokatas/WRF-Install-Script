@@ -97,6 +97,8 @@ export LD_LIBRARY_PATH=/usr/lib
 if [ "$type" = "Chem" ]; then
 [[ -z $(grep "export FLEX_LIB_DIR=/usr/lib" ~/.bashrc) ]] && echo "export FLEX_LIB_DIR=/usr/lib" >> ~/.bashrc
 [[ -z $(grep "export YACC='yacc -d'" ~/.bashrc) ]] && echo "export YACC='yacc -d'" >> ~/.bashrc
+export FLEX_LIB_DIR=/usr/lib
+export YACC='yacc -d'
 fi
 ##########################################
 #	Jasper Installation		#
