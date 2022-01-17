@@ -222,6 +222,7 @@ fi
 #######################################
 if [ "$type" = "Chem" ]; then
  echo "Do you want the PREP-CHEM-SRC program to be installed? PREP-CHEM-SRC is a widely used emission preparation program for WRF-Chem."
+ echo "please type yes or no"
  read prep_chem_validation
   if [ ${prep_chem_validation} = "yes" ]; then
   echo "firstly starting to compile convert_emiss.exe. convert_emiss.exe is needed for convert emissions which are created from PREP-CHEM-SRC." 
