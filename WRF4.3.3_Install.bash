@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.3.2_Install.bash"	#
+#  To execute this script "bash WRF4.3.3_Install.bash"	#
 #########################################################
-WRFversion="4.3.2"
+WRFversion="4.3.3"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -254,6 +254,7 @@ if [ "$type" = "Chem" ]; then
   rm -r Global_emissions_v3
   mv Emission_data/ EMISSION_DATA
   mv surface_data/ SURFACE_DATA
+  cd ../../..
   echo "PREP-CHEM-SRC compilation has finished."
   fi
 fi
