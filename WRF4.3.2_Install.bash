@@ -232,6 +232,7 @@ if [ "$type" = "Chem" ]; then
   echo "Compilation of convert_emiss.exe is finished, now PREP-CHEM-SRC download and compilation has started."
   [ -d "PREP-CHEM-SRC-1.5" ] && mv PREP-CHEM-SRC-1.5 PREP-CHEM-SRC-1.5-old
   [ -f "prep_chem_sources_v1.5_24aug2015.tar.gz" ] && mv prep_chem_sources_v1.5_24aug2015.tar.gz prep_chem_sources_v1.5_24aug2015.tar.gz-old
+  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/prep_chem_sources_v1.5_24aug2015.tar.gz
   tar -zxvf prep_chem_sources_v1.5_24aug2015.tar.gz
   cd PREP-CHEM-SRC-1.5/bin/build
   sed -i "s#NETCDF=.*#NETCDF=/usr#" include.mk.gfortran.wrf
