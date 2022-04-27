@@ -119,7 +119,7 @@ cd ..
 cd ..
 [ -d "WRF-${WRFversion}" ] && mv WRF-${WRFversion} WRF-${WRFversion}-old
 [ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
-wget https://github.com/wrf-model/WRF/archive/v${WRFversion}.tar.gz
+wget https://github.com/wrf-model/WRF/archive/v${WRFversion}/v${WRFversion}.tar.gz
 mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
 tar -zxvf WRFV${WRFversion}.tar.gz
 cd WRF-${WRFversion}
