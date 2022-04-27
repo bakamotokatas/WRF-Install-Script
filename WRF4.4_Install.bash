@@ -2,22 +2,19 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.3.3_Install.bash"	#
+#  To execute this script "bash WRF4.4_Install.bash"	#
 #########################################################
-WRFversion="4.3.3"
+WRFversion="4.4"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
         type="Chem"
-    elif [ "$1" = "-nmm" ]; then
-        type="NMM"
     elif [ "$1" = "-arw" ]; then
         type="ARW"
     else
         echo "Unrecognized option, please run as"
         echo "For WRF-ARW \"bash WRF${WRFversion}_Install.bash -arw\""
         echo "For WRF-Chem \"bash WRF${WRFversion}_Install.bash -chem\""
-        echo "For WRF-NMM \"bash WRF${WRFversion}_Install.bash -nmm\""
         exit
     fi
 fi
@@ -129,10 +126,6 @@ cd WRF-${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
-elif [ "$type" = "NMM" ]; then
-export WRF_NMM_CORE=1
-export wrf_core=NMM_CORE
-fi
 sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' configure
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
@@ -145,11 +138,7 @@ gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
-if [ "$type" = "NMM" ]; then
-logsave compile.log ./compile nmm_real
-else
 logsave compile.log ./compile em_real
-fi
 cd arch
 cp Config.pl_backup Config.pl
 cd ..
@@ -164,7 +153,7 @@ mv WRF-${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.3.1"
+WPSversion="4.4"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
