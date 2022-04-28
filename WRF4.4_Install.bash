@@ -130,8 +130,8 @@ sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' config
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
 cp Config.pl Config.pl_backup
-sed -i '420s/.*/  $response = 34 ;/' Config.pl
-sed -i '695s/.*/  $response = 1 ;/' Config.pl
+sed -i '428s/.*/  $response = 34 ;/' Config.pl
+sed -i '869s/.*/  $response = 1 ;/' Config.pl
 cd ..
 ./configure
 gfortversion=$(gfortran -dumpversion | cut -c1)
@@ -162,11 +162,11 @@ tar -zxvf WPSV${WPSversion}.TAR.gz
 cd WPS-${WPSversion}
 cd arch
 cp Config.pl Config.pl_backup
-sed -i '141s/.*/  $response = 3 ;/' Config.pl
+sed -i '154s/.*/  $response = 3 ;/' Config.pl
 cd ..
 ./clean
-sed -i '133s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i "165s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
+sed -i '141s/.*/    NETCDFF="-lnetcdff"/' configure
+sed -i "173s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
