@@ -126,6 +126,7 @@ cd WRF-${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
+fi
 sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' configure
 sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
 cd arch
