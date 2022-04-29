@@ -117,12 +117,12 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
-[ -d "WRF-${WRFversion}" ] && mv WRF-${WRFversion} WRF-${WRFversion}-old
+[ -d "WRFV${WRFversion}" ] && mv WRFV${WRFversion} WRFV${WRFversion}-old
 [ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
 wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz
 mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
 tar -zxvf WRFV${WRFversion}.tar.gz
-cd WRF-${WRFversion}
+cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
@@ -149,7 +149,7 @@ if [ -n "$(grep "Problems building executables, look for errors in the build log
 fi
 cd ..
 [ -d "WRF-${WRFversion}-${type}" ] && mv WRF-${WRFversion}-${type} WRF-${WRFversion}-${type}-old
-mv WRF-${WRFversion} WRF-${WRFversion}-${type}
+mv WRFV${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
