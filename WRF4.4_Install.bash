@@ -127,8 +127,7 @@ if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
 fi
-sed -i 's#  export USENETCDF=$USENETCDF.*#  export USENETCDF="-lnetcdf"#' configure
-sed -i 's#  export USENETCDFF=$USENETCDFF.*#  export USENETCDFF="-lnetcdff"#' configure
+sed -i 's#$NETCDF/lib#$NETCDF/lib/x86_64-linux-gnu#g' configure
 cd arch
 cp Config.pl Config.pl_backup
 sed -i '428s/.*/  $response = 34 ;/' Config.pl
