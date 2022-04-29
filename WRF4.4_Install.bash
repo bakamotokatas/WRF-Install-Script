@@ -134,6 +134,7 @@ sed -i '428s/.*/  $response = 34 ;/' Config.pl
 sed -i '869s/.*/  $response = 1 ;/' Config.pl
 cd ..
 ./configure
+sed -i 's#-L/usr/lib -lnetcdff -lnetcdf#-L/usr/lib/x86_64-linux-gnu -lnetcdff -lnetcdf#g' configure.wrf
 gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
