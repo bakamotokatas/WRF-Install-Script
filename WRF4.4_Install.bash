@@ -47,14 +47,21 @@ fi
 #########################################################
 #   Installing neccesary packages                       #
 #########################################################
+
 if [ "$type" = "Chem" ]; then
  extra_packages="flex-old bison"
 fi
 echo "Please enter your sudo password, so necessary packages can be installed."
 sudo apt-get update
-sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
+mpich_repoversion=$(apt-cache policy mpich | grep Candidate | cut -d ':' -f 2 | cut -d '-' -f 1 | cut -c2)
+if [ "$mpich_repoversion" -ge 4 ]; then
+mpirun_packages="libopenmpi-dev libhdf5-openmpi-dev"
+else
+mpirun_packages="mpich libhdf5-mpich-dev"
+fi
+sudo apt-get install -y build-essential csh gfortran m4 curl perl ${mpirun_packages} libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}
 
-package4checks="build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}"
+package4checks="build-essential csh gfortran m4 curl perl ${mpirun_packages} libpng-dev netcdf-bin libnetcdff-dev ${extra_packages}"
 for packagecheck in ${package4checks}; do
  packagechecked=$(dpkg-query --show --showformat='${db:Status-Status}\n' $packagecheck | grep not-installed)
  if [ "$packagechecked" = "not-installed" ]; then
