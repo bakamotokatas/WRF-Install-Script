@@ -144,6 +144,7 @@ cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
+sed -i '232s/.*/module_mosaic_addemiss.o: module_data_mosaic_asect.o module_data_sorgam.o module_gocart_dust.o/' chem/depend.chem
 fi
 sed -i 's#$NETCDF/lib#$NETCDF/lib/x86_64-linux-gnu#g' configure
 cd arch
