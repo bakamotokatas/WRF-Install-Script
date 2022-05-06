@@ -11,10 +11,13 @@ if [ -n "$1" ]; then
         type="Chem"
     elif [ "$1" = "-arw" ]; then
         type="ARW"
+    elif [ "$1" = "-hydro" ]; then
+        type="Hydro"
     else
         echo "Unrecognized option, please run as"
         echo "For WRF-ARW \"bash WRF${WRFversion}_Install.bash -arw\""
         echo "For WRF-Chem \"bash WRF${WRFversion}_Install.bash -chem\""
+	echo "For WRF-Hydro \"bash WRF${WRFversion}_Install.bash -hydro\""
         exit
     fi
 fi
@@ -129,6 +132,14 @@ cd ..
 wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz
 mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
 tar -zxvf WRFV${WRFversion}.tar.gz
+if [ "$type" = "Hydro" ]; then
+export WRF_HYDRO=1
+[ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
+wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz
+tar -zxvf v5.2.0.tar.gz
+mv -f WRFV${WRFversion}/hydro/* wrf_hydro_nwm_public-5.2.0/trunk/NDHMS
+mv -f wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/* WRFV${WRFversion}/hydro
+fi
 cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
