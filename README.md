@@ -7,6 +7,8 @@ Since WRF-Install-Script uses operating system libraries, it installs much faste
 
 You can download each version from the [releases](https://github.com/bakamotokatas/WRF-Install-Script/releases).
 
+Currently only WRF4.3.3_Install.bash support Ubuntu 22.04. Therefore if you are using Ubuntu 22.04, please use WRF4.3.3_Install.bash, otherwise it will fail to build. All other releases will be updated soon to support Ubuntu 22.04. WRF4.4_Install.bash will be released within a few days.
+
 To run the scripts, you should run the commands below.
 
 For WRF4.3.3 with ARW option(default)
