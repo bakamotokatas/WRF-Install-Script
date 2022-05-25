@@ -19,3 +19,8 @@ For WRF4.4 with Chem option (WRF-Chem)
 ```
 bash WRF4.4_Install.bash -chem
 ```
+
+For WRF4.4 with Hydro option (WRF-Hydro)
+```
+bash WRF4.4_Install.bash -hydro
+```
