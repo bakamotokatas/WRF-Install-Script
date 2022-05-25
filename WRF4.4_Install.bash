@@ -137,8 +137,8 @@ export WRF_HYDRO=1
 [ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
 wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz
 tar -zxvf v5.2.0.tar.gz
-mv -f WRFV${WRFversion}/hydro/* wrf_hydro_nwm_public-5.2.0/trunk/NDHMS
-mv -f wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/* WRFV${WRFversion}/hydro
+/bin/cp -rf WRFV${WRFversion}/hydro/* wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/
+/bin/cp -rf wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/* WRFV${WRFversion}/hydro/
 fi
 cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
