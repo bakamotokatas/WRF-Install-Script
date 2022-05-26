@@ -11,6 +11,26 @@ Currently only WRF4.3.3_Install.bash support Ubuntu 22.04. Therefore if you are 
 
 To run the scripts, you should run the commands below.
 
+For WRF4.4 with ARW option(default)
+
+```
+bash WRF4.4_Install.bash
+```
+or
+```
+bash WRF4.4_Install.bash -arw
+```
+
+For WRF4.4 with Chem option (WRF-Chem)
+```
+bash WRF4.4_Install.bash -chem
+```
+
+For WRF4.4 with Hydro option (WRF-Hydro)
+```
+bash WRF4.4_Install.bash -hydro
+```
+
 For WRF4.3.3 with ARW option(default)
 
 ```
