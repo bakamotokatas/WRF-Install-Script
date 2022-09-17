@@ -4,7 +4,7 @@
 # 	This Script was written by Umur Dinç    	#
 #  To execute this script "bash WRF4.4_Install.bash"	#
 #########################################################
-WRFversion="4.4"
+WRFversion="4.4.1"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
