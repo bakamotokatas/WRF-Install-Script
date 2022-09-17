@@ -250,7 +250,10 @@ if [ "$type" = "Chem" ]; then
   sed -i "s#HDF5=.*#HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial#" include.mk.gfortran.wrf
   sed -i "s#HDF5_INC=.*#HDF5_INC=-I/usr/include/hdf5/serial#" include.mk.gfortran.wrf
   sed -i 's#-L$(HDF5)/lib#-L/usr/lib/x86_64-linux-gnu/hdf5/serial#' include.mk.gfortran.wrf
+  gfortversion=$(gfortran -dumpversion)
+  if [ "$gfortversion" -ge 10 ]; then
   sed -i 's#F_OPTS=.*#F_OPTS=  -Xpreprocessor -D$(CHEM) -O2 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch#' include.mk.gfortran.wrf
+  fi
   sed -i "s#-L/scratchin/grupos/catt-brams/shared/libs/gfortran/zlib-1.2.8/lib#-L/usr/lib#" include.mk.gfortran.wrf
   sed -i "842s#.*#    'ENERGY     ',\&#" ../../src/edgar_emissions.f90
   sed -i "843s#.*#    'INDUSTRY   ',\&#" ../../src/edgar_emissions.f90
