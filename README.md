@@ -7,28 +7,28 @@ Since WRF-Install-Script uses operating system libraries, it installs much faste
 
 You can download each version from the [releases](https://github.com/bakamotokatas/WRF-Install-Script/releases).
 
-Currently only WRF4.4_Install.bash and WRF4.3.3_Install.bash support Ubuntu 22.04. Therefore if you are using Ubuntu 22.04, please use WRF4.4_Install.bash and WRF4.3.3_Install.bash, otherwise it will fail to build. All other releases will be updated soon to support Ubuntu 22.04.
+Currently only WRF4.4.1_Install.bash, WRF4.4_Install.bash and WRF4.3.3_Install.bash support Ubuntu 22.04. Therefore if you are using Ubuntu 22.04, please use WRF4.4.1_Install.bash, WRF4.4_Install.bash and WRF4.3.3_Install.bash, otherwise it will fail to build. All other releases will be updated soon to support Ubuntu 22.04.
 
 To run the scripts, you should run the commands below.
 
-For WRF4.4 with ARW option(default)
+For WRF4.4.1 with ARW option(default)
 
 ```
-bash WRF4.4_Install.bash
+bash WRF4.4.1_Install.bash
 ```
 or
 ```
-bash WRF4.4_Install.bash -arw
+bash WRF4.4.1_Install.bash -arw
 ```
 
-For WRF4.4 with Chem option (WRF-Chem)
+For WRF4.4.1 with Chem option (WRF-Chem)
 ```
-bash WRF4.4_Install.bash -chem
+bash WRF4.4.1_Install.bash -chem
 ```
 
-For WRF4.4 with Hydro option (WRF-Hydro)
+For WRF4.4.1 with Hydro option (WRF-Hydro)
 ```
-bash WRF4.4_Install.bash -hydro
+bash WRF4.4.1_Install.bash -hydro
 ```
 
 For WRF4.3.3 with ARW option(default)
