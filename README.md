@@ -11,24 +11,24 @@ Currently only WRF4.4.2_Install.bash, WRF4.4.1_Install.bash, WRF4.4_Install.bash
 
 To run the scripts, you should run the commands below.
 
-For WRF4.4.1 with ARW option(default)
+For WRF4.4.2 with ARW option(default)
 
 ```
-bash WRF4.4.1_Install.bash
+bash WRF4.4.2_Install.bash
 ```
 or
 ```
-bash WRF4.4.1_Install.bash -arw
+bash WRF4.4.2_Install.bash -arw
 ```
 
-For WRF4.4.1 with Chem option (WRF-Chem)
+For WRF4.4.2 with Chem option (WRF-Chem)
 ```
-bash WRF4.4.1_Install.bash -chem
+bash WRF4.4.2_Install.bash -chem
 ```
 
-For WRF4.4.1 with Hydro option (WRF-Hydro)
+For WRF4.4.2 with Hydro option (WRF-Hydro)
 ```
-bash WRF4.4.1_Install.bash -hydro
+bash WRF4.4.2_Install.bash -hydro
 ```
 
 For WRF4.3.3 with ARW option(default)
