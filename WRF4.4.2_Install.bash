@@ -131,7 +131,7 @@ cd ..
 [ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
 wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz
 mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
-tar -zxvf WRFV${WRFversion}.tar.gz
+tar -zxvf WRFV${WRFversion}.tar.gz && mv WRF WRFV${WRFversion}
 if [ "$type" = "Hydro" ]; then
 export WRF_HYDRO=1
 [ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
