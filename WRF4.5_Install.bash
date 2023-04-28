@@ -150,7 +150,7 @@ export WRF_CHEM=1
 export WRF_KPP=1
 fi
 sed -i 's#$NETCDF/lib#$NETCDF/lib/x86_64-linux-gnu#g' configure
-(echo 34 ; echo 1 ) | ./configure
+( echo 34 ; echo 1 ) | ./configure
 sed -i 's#-L/usr/lib -lnetcdff -lnetcdf#-L/usr/lib/x86_64-linux-gnu -lnetcdff -lnetcdf#g' configure.wrf
 gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
@@ -175,8 +175,8 @@ wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz -O WPSV${WPS
 tar -zxvf WPSV${WPSversion}.TAR.gz
 cd WPS-${WPSversion}
 ./clean
-sed -i '141s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i "173s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
+sed -i '163s/.*/    NETCDFF="-lnetcdff"/' configure
+sed -i "195s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 echo 3 | ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
