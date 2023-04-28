@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.4.2_Install.bash"	#
+#  To execute this script "bash WRF4.5_Install.bash"	#
 #########################################################
-WRFversion="4.4.2"
+WRFversion="4.5"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -26,6 +26,10 @@ echo "Installation may take several hours and it takes 52 GB storage. Be sure th
 #########################################################
 #	Controls					#
 #########################################################
+if [ "$EUID" -eq 0 ]
+  then echo "Running this script as root or sudo, is not suggested"
+  exit
+fi
 osbit=$(uname -m)
 if [ "$osbit" = "x86_64" ]; then
         echo "64 bit operating system is used"
@@ -118,8 +122,8 @@ cd jasper-1.900.1/
 ./configure --prefix=$DIR/grib2
 make
 make install
-echo "export JASPERLIB=$DIR/grib2/lib" >> ~/.bashrc
-echo "export JASPERINC=$DIR/grib2/include" >> ~/.bashrc
+[[ -z $(grep "export JASPERLIB=$DIR/grib2/lib" ~/.bashrc) ]] && echo "export JASPERLIB=$DIR/grib2/lib" >> ~/.bashrc
+[[ -z $(grep "export JASPERINC=$DIR/grib2/include" ~/.bashrc) ]] && echo "export JASPERINC=$DIR/grib2/include" >> ~/.bashrc
 export JASPERLIB=$DIR/grib2/lib
 export JASPERINC=$DIR/grib2/include
 cd ..
@@ -127,11 +131,10 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
-[ -d "WRF" ] && mv WRF WRF-old
 [ -d "WRFV${WRFversion}" ] && mv WRFV${WRFversion} WRFV${WRFversion}-old
-[ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
+[ -f "WRFV${WRFversion}.tar.gz" ] && mv WRFV${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz-old
 wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz -O WRFV${WRFversion}.tar.gz
-tar -zxvf WRFV${WRFversion}.tar.gz && mv WRF WRFV${WRFversion}
+tar -zxvf WRFV${WRFversion}.tar.gz
 if [ "$type" = "Hydro" ]; then
 export WRF_HYDRO=1
 [ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
@@ -147,21 +150,13 @@ export WRF_CHEM=1
 export WRF_KPP=1
 fi
 sed -i 's#$NETCDF/lib#$NETCDF/lib/x86_64-linux-gnu#g' configure
-cd arch
-cp Config.pl Config.pl_backup
-sed -i '428s/.*/  $response = 34 ;/' Config.pl
-sed -i '869s/.*/  $response = 1 ;/' Config.pl
-cd ..
-./configure
+(echo 34 ; echo 1 ) | ./configure
 sed -i 's#-L/usr/lib -lnetcdff -lnetcdf#-L/usr/lib/x86_64-linux-gnu -lnetcdff -lnetcdf#g' configure.wrf
 gfortversion=$(gfortran -dumpversion | cut -c1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
 logsave compile.log ./compile em_real
-cd arch
-cp Config.pl_backup Config.pl
-cd ..
 if [ -n "$(grep "Problems building executables, look for errors in the build log" compile.log)" ]; then
         echo "Sorry, There were some errors while installing WRF."
         echo "Please create new issue for the problem, https://github.com/bakamotokatas/WRF-Install-Script/issues"
@@ -173,25 +168,18 @@ mv WRFV${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.4"
+WPSversion="4.5"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
-[ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
+[ -f "WPSV${WPSversion}.TAR.gz" ] && mv WPSV${WPSversion}.TAR.gz WPSV${WPSversion}.TAR.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz -O WPSV${WPSversion}.TAR.gz
 tar -zxvf WPSV${WPSversion}.TAR.gz
 cd WPS-${WPSversion}
-cd arch
-cp Config.pl Config.pl_backup
-sed -i '154s/.*/  $response = 3 ;/' Config.pl
-cd ..
 ./clean
 sed -i '141s/.*/    NETCDFF="-lnetcdff"/' configure
 sed -i "173s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
-./configure
+echo 3 | ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
-cd arch
-cp Config.pl_backup Config.pl
-cd ..
 cd ..
 #########################################
 #	Opening Geog Data Files 	#
