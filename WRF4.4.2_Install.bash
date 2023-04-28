@@ -112,7 +112,7 @@ fi
 #########################################
 [ -d "jasper-1.900.1" ] && mv jasper-1.900.1 jasper-1.900.1-old
 [ -f "jasper-1.900.1.tar.gz" ] && mv jasper-1.900.1.tar.gz jasper-1.900.1.tar.gz-old
-wget http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz
+wget https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/jasper-1.900.1.tar.gz -O jasper-1.900.1.tar.gz
 tar -zxvf jasper-1.900.1.tar.gz
 cd jasper-1.900.1/
 ./configure --prefix=$DIR/grib2
@@ -127,15 +127,15 @@ cd ..
 #	WRF Installation		#
 #########################################
 cd ..
+[ -d "WRF" ] && mv WRF WRF-old
 [ -d "WRFV${WRFversion}" ] && mv WRFV${WRFversion} WRFV${WRFversion}-old
 [ -f "v${WRFversion}.tar.gz" ] && mv v${WRFversion}.tar.gz v${WRFversion}.tar.gz-old
-wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz
-mv v${WRFversion}.tar.gz WRFV${WRFversion}.tar.gz
-tar -zxvf WRFV${WRFversion}.tar.gz
+wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFversion}.tar.gz -O WRFV${WRFversion}.tar.gz
+tar -zxvf WRFV${WRFversion}.tar.gz && mv WRF WRFV${WRFversion}
 if [ "$type" = "Hydro" ]; then
 export WRF_HYDRO=1
 [ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
-wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz
+wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz -O v5.2.0.tar.gz
 tar -zxvf v5.2.0.tar.gz
 /bin/cp -rf wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/* WRFV${WRFversion}/hydro/
 rm v5.2.0.tar.gz
@@ -176,8 +176,7 @@ mv WRFV${WRFversion} WRF-${WRFversion}-${type}
 WPSversion="4.4"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -f "v${WPSversion}.tar.gz" ] && mv v${WPSversion}.tar.gz v${WPSversion}.tar.gz-old
-wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz
-mv v${WPSversion}.tar.gz WPSV${WPSversion}.TAR.gz
+wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz -O WPSV${WPSversion}.TAR.gz
 tar -zxvf WPSV${WPSversion}.TAR.gz
 cd WPS-${WPSversion}
 cd arch
@@ -204,13 +203,13 @@ if [ -d "WPS_GEOG" ]; then
   echo "please type yes or no"
   read GEOG_validation
   if [ ${GEOG_validation} = "yes" ]; then
-    wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
+    wget https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz -O geog_high_res_mandatory.tar.gz
     tar -zxvf geog_high_res_mandatory.tar.gz
   else
     echo "You can download it later from http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz and extract it"
    fi
 else
-wget http://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz
+wget https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz -O geog_high_res_mandatory.tar.gz
 tar -zxvf geog_high_res_mandatory.tar.gz
 fi
 if [ "$type" = "Chem" ]; then
@@ -219,7 +218,7 @@ if [ "$type" = "Chem" ]; then
  for i in ${Chem_Geog}; do
   if [ ! -d $i ]; then
    echo $i
-   wget https://www2.mmm.ucar.edu/wrf/src/wps_files/${i}.tar.bz2 
+   wget https://www2.mmm.ucar.edu/wrf/src/wps_files/${i}.tar.bz2 -O ${i}.tar.bz2
    tar -xvf ${i}.tar.bz2
    rm ${i}.tar.bz2
   fi
@@ -241,7 +240,7 @@ if [ "$type" = "Chem" ]; then
   echo "Compilation of convert_emiss.exe is finished, now PREP-CHEM-SRC download and compilation has started."
   [ -d "PREP-CHEM-SRC-1.5" ] && mv PREP-CHEM-SRC-1.5 PREP-CHEM-SRC-1.5-old
   [ -f "prep_chem_sources_v1.5_24aug2015.tar.gz" ] && mv prep_chem_sources_v1.5_24aug2015.tar.gz prep_chem_sources_v1.5_24aug2015.tar.gz-old
-  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/prep_chem_sources_v1.5_24aug2015.tar.gz
+  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/prep_chem_sources_v1.5_24aug2015.tar.gz -O prep_chem_sources_v1.5_24aug2015.tar.gz
   tar -zxvf prep_chem_sources_v1.5_24aug2015.tar.gz
   cd PREP-CHEM-SRC-1.5/bin/build
   sed -i "s#NETCDF=.*#NETCDF=/usr#" include.mk.gfortran.wrf
@@ -261,7 +260,7 @@ if [ "$type" = "Chem" ]; then
   cd ..
   mkdir datain
   cd datain
-  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/global_emissions_v3_24aug2015.tar.gz
+  wget ftp://aftp.fsl.noaa.gov/divisions/taq/global_emissions/global_emissions_v3_24aug2015.tar.gz -O global_emissions_v3_24aug2015.tar.gz
   tar -zxvf global_emissions_v3_24aug2015.tar.gz
   mv Global_emissions_v3/* .
   rm -r Global_emissions_v3
