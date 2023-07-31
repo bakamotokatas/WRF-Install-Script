@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.5_Install.bash"	#
+#  To execute this script "bash WRF4.5.1_Install.bash"	#
 #########################################################
-WRFversion="4.5"
+WRFversion="4.5.1"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -176,7 +176,7 @@ tar -zxvf WPSV${WPSversion}.TAR.gz
 cd WPS-${WPSversion}
 ./clean
 sed -i '163s/.*/    NETCDFF="-lnetcdff"/' configure
-sed -i "195s/.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
+sed -i "s/standard_wrf_dirs=.*/standard_wrf_dirs=\"WRF-${WRFversion}-${type} WRF WRF-4.0.3 WRF-4.0.2 WRF-4.0.1 WRF-4.0 WRFV3\"/" configure
 echo 3 | ./configure
 logsave compile.log ./compile
 sed -i "s# geog_data_path.*# geog_data_path = '../WPS_GEOG/'#" namelist.wps
