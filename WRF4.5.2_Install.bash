@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.5.1_Install.bash"	#
+#  To execute this script "bash WRF4.5.2_Install.bash"	#
 #########################################################
-WRFversion="4.5.1"
+WRFversion="4.5.2"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -152,7 +152,7 @@ fi
 sed -i 's#$NETCDF/lib#$NETCDF/lib/x86_64-linux-gnu#g' configure
 ( echo 34 ; echo 1 ) | ./configure
 sed -i 's#-L/usr/lib -lnetcdff -lnetcdf#-L/usr/lib/x86_64-linux-gnu -lnetcdff -lnetcdf#g' configure.wrf
-gfortversion=$(gfortran -dumpversion | cut -c1)
+gfortversion=$(gfortran -dumpversion | cut -d '.' -f 1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
 fi
@@ -236,7 +236,7 @@ if [ "$type" = "Chem" ]; then
   sed -i "s#HDF5=.*#HDF5=/usr/lib/x86_64-linux-gnu/hdf5/serial#" include.mk.gfortran.wrf
   sed -i "s#HDF5_INC=.*#HDF5_INC=-I/usr/include/hdf5/serial#" include.mk.gfortran.wrf
   sed -i 's#-L$(HDF5)/lib#-L/usr/lib/x86_64-linux-gnu/hdf5/serial#' include.mk.gfortran.wrf
-  gfortversion=$(gfortran -dumpversion)
+  gfortversion=$(gfortran -dumpversion | cut -d '.' -f 1)
   if [ "$gfortversion" -ge 10 ]; then
   sed -i 's#F_OPTS=.*#F_OPTS=  -Xpreprocessor -D$(CHEM) -O2 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch#' include.mk.gfortran.wrf
   fi
