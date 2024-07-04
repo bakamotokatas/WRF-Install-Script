@@ -5,22 +5,22 @@ WRF Install script will install the WRF and WPS with the needed libraries(netcdf
 
 To run the scripts, you should run the commands below.
 
-For WRF4.5.2 with ARW option(default)
+For WRF4.6.0 with ARW option(default)
 
 ```
-bash WRF4.5.2_Install.bash
+bash WRF4.6.0_Install.bash
 ```
 or
 ```
-bash WRF4.5.2_Install.bash -arw
+bash WRF4.6.0_Install.bash -arw
 ```
 
-For WRF4.5.2 with Chem option (WRF-Chem)
+For WRF4.6.0 with Chem option (WRF-Chem)
 ```
-bash WRF4.5.2_Install.bash -chem
+bash WRF4.6.0_Install.bash -chem
 ```
 
-For WRF4.5.2 with Hydro option (WRF-Hydro)
+For WRF4.6.0 with Hydro option (WRF-Hydro)
 ```
-bash WRF4.5.2_Install.bash -hydro
+bash WRF4.6.0_Install.bash -hydro
 ```

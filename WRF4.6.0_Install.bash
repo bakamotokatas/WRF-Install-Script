@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.5.2_Install.bash"	#
+#  To execute this script "bash WRF4.6.0_Install.bash"	#
 #########################################################
-WRFversion="4.5.2"
+WRFversion="4.6.0"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
@@ -43,7 +43,7 @@ if [ -n "$packagemanagement" ]; then
         echo "Operating system uses apt packagemanagement"
 else
         echo "Sorry! This script is written for the operating systems which uses apt packagemanagement. Please try this script with debian based operating systems, such as, Ubuntu, Linux Mint, Debian, Pardus etc."
-#Tested on Ubuntu 20.04
+#Tested on Ubuntu 22.04
 exit
 fi
 local_language=$(locale | grep LANG | grep tr_TR)
@@ -137,12 +137,12 @@ wget https://github.com/wrf-model/WRF/releases/download/v${WRFversion}/v${WRFver
 tar -zxvf WRFV${WRFversion}.tar.gz
 if [ "$type" = "Hydro" ]; then
 export WRF_HYDRO=1
-[ -f "v5.2.0.tar.gz" ] && mv v5.2.0.tar.gz v5.2.0.tar.gz-old
-wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz -O v5.2.0.tar.gz
-tar -zxvf v5.2.0.tar.gz
-/bin/cp -rf wrf_hydro_nwm_public-5.2.0/trunk/NDHMS/* WRFV${WRFversion}/hydro/
-rm v5.2.0.tar.gz
-rm -r wrf_hydro_nwm_public-5.2.0
+[ -f "v5.3.0.tar.gz" ] && mv v5.3.0.tar.gz v5.3.0.tar.gz-old
+wget https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.3.0.tar.gz -O v5.3.0.tar.gz
+tar -zxvf v5.3.0.tar.gz
+/bin/cp -rf wrf_hydro_nwm_public-5.3.0/trunk/NDHMS/* WRFV${WRFversion}/hydro/
+rm v5.3.0.tar.gz
+rm -r wrf_hydro_nwm_public-5.3.0
 fi
 cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
@@ -168,7 +168,7 @@ mv WRFV${WRFversion} WRF-${WRFversion}-${type}
 #########################################
 #	WPS Installation		#
 #########################################
-WPSversion="4.5"
+WPSversion="4.6.0"
 [ -d "WPS-${WPSversion}" ] && mv WPS-${WPSversion} WPS-${WPSversion}-old
 [ -f "WPSV${WPSversion}.TAR.gz" ] && mv WPSV${WPSversion}.TAR.gz WPSV${WPSversion}.TAR.gz-old
 wget https://github.com/wrf-model/WPS/archive/v${WPSversion}.tar.gz -O WPSV${WPSversion}.TAR.gz
