@@ -56,7 +56,7 @@ fi
 #########################################################
 
 if [ "$type" = "Chem" ]; then
- extra_packages="flex-old bison"
+ extra_packages="flex bison"
 fi
 echo "Please enter your sudo password, so necessary packages can be installed."
 sudo apt-get update
@@ -106,9 +106,9 @@ export LDFLAGS="-L/usr/lib/x86_64-linux-gnu/hdf5/serial/ -L/usr/lib"
 export CPPFLAGS="-I/usr/include/hdf5/serial/ -I/usr/include"
 export LD_LIBRARY_PATH=/usr/lib
 if [ "$type" = "Chem" ]; then
-[[ -z $(grep "export FLEX_LIB_DIR=/usr/lib" ~/.bashrc) ]] && echo "export FLEX_LIB_DIR=/usr/lib" >> ~/.bashrc
+[[ -z $(grep "export FLEX_LIB_DIR=/usr/lib/x86_64-linux-gnu" ~/.bashrc) ]] && echo "export FLEX_LIB_DIR=/usr/lib/x86_64-linux-gnu" >> ~/.bashrc
 [[ -z $(grep "export YACC='yacc -d'" ~/.bashrc) ]] && echo "export YACC='yacc -d'" >> ~/.bashrc
-export FLEX_LIB_DIR=/usr/lib
+export FLEX_LIB_DIR=/usr/lib/x86_64-linux-gnu
 export YACC='yacc -d'
 fi
 ##########################################
