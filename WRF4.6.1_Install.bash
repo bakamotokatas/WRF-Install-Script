@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.6.0_Install.bash"	#
+#  To execute this script "bash WRF4.6.1_Install.bash"	#
 #########################################################
-WRFversion="4.6.0"
+WRFversion="4.6.1"
 type="ARW"
 if [ -n "$1" ]; then
     if [ "$1" = "-chem" ]; then
