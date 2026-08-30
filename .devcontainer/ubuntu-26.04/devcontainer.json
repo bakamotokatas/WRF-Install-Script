@@ -1,0 +1,7 @@
+{
+  "name": "WRF Ubuntu 26.04",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "vscode"
+}
