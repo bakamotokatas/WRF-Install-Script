@@ -85,10 +85,10 @@ bash tests/prep-chem-smoke.bash /path/to/PREP-CHEM-SRC-1.5 /path/to/WRF-4.7.1-Ch
 
 Sample data: [WRF real-data case](https://www2.mmm.ucar.edu/wrf/test_data/v431_test_case.tar.gz)
 and [WPS GRIB input](https://www2.mmm.ucar.edu/wrf/src/data/avn_data.tar.gz).
-Validated on Ubuntu 26.04 (x86_64): ARW/Chem/Hydro builds, WPS decoding,
-PREP-CHEM-SRC mapping and emissions conversion. Runtime checks have the scope
-described above. Detailed logs and machine-specific recovery files are kept
-outside the repository.
+Validated on Ubuntu 24.04 and 26.04 (x86_64): ARW/Chem/Hydro builds, WPS decoding,
+PREP-CHEM-SRC mapping and emissions conversion. Runtime checks
+have the scope described above. Detailed logs and machine-specific recovery
+files are kept outside the repository.
 
 The JPEG2000 GRIB2 decoder check requires Python 3 and uses a small synthetic
 fixture with known pressure values:
