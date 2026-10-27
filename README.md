@@ -28,7 +28,7 @@ bash WRF4.7.1_Install.bash -hydro
 To place the installation on a filesystem with sufficient space, select its build directory:
 
 ```bash
-bash WRF4.7.1_Install.bash -arw --build-dir /tmp/Build_WRF --non-interactive --jobs 2
+bash WRF4.7.1_Install.bash -arw --build-dir /tmp/Build_WRF --non-interactive
 ```
 
 Geography is downloaded and extracted into `WPS_GEOG` under the selected build
@@ -40,14 +40,22 @@ PREP-CHEM-SRC installation unless `--with-prep-chem` is supplied, and returns
 to the calling shell when finished.
 System package installation still requires sudo access.
 `--build-dir PATH` selects an isolated installation directory (default:
-`~/Build_WRF`), and `--jobs N` limits WRF compilation processes (default: all
-available CPUs). Previous build directories are backed up with a timestamp; the WPS build uses the selected WRF
-variant. Build success requires all four WRF and all three WPS executables.
+`~/Build_WRF`). WRF compilation uses one job by default. Use `--jobs N` to
+increase parallel compilation jobs when sufficient RAM is available.
+Previous build directories are backed up with a timestamp; the WPS build uses
+the selected WRF variant. Build success requires all four WRF and all three
+WPS executables.
+
+To explicitly use two parallel WRF compilation jobs:
+
+```bash
+bash WRF4.7.1_Install.bash -arw --jobs 2
+```
 
 To include PREP-CHEM-SRC 1.5 and `convert_emiss.exe` in a Chem installation:
 
 ```bash
-bash WRF4.7.1_Install.bash -chem --with-prep-chem --non-interactive --jobs 2
+bash WRF4.7.1_Install.bash -chem --with-prep-chem --non-interactive
 ```
 
 The converter reuses the completed WRF-Chem libraries. PREP-CHEM-SRC's separate

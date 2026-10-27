@@ -9,7 +9,7 @@ type="ARW"
 non_interactive=no
 prep_chem_validation=ask
 build_dir="$HOME/Build_WRF"
-build_jobs=$(nproc)
+build_jobs=1
 while [ "$#" -gt 0 ]; do
     case "$1" in
         -arw) type="ARW" ;;
@@ -27,7 +27,8 @@ while [ "$#" -gt 0 ]; do
             echo "Usage: bash $0 [-arw|-chem|-hydro] [--non-interactive] [--with-prep-chem] [--build-dir PATH] [--jobs N]"
             echo "--non-interactive: reuse geography, skip PREP-CHEM-SRC unless requested and do not open a shell."
             echo "--with-prep-chem: install optional PREP-CHEM-SRC for -chem, including in non-interactive mode."
-            echo "--build-dir PATH: isolate a build (default: ~/Build_WRF); --jobs N: compilation processes."
+            echo "--build-dir PATH: isolate a build (default: ~/Build_WRF)."
+            echo "--jobs N: parallel WRF compilation jobs (default: 1)."
             exit 0 ;;
         *) echo "Unrecognized option: $1" >&2; exit 1 ;;
     esac
