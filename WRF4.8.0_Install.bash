@@ -2,9 +2,9 @@
 #########################################################
 #		WRF Install Script     			#
 # 	This Script was written by Umur Dinç    	#
-#  To execute this script "bash WRF4.7.1_Install.bash"	#
+#  To execute this script "bash WRF4.8.0_Install.bash"	#
 #########################################################
-WRFversion="4.7.1"
+WRFversion="4.8.0"
 type="ARW"
 non_interactive=no
 prep_chem_validation=ask
@@ -187,8 +187,6 @@ cd WRFV${WRFversion}
 if [ "$type" = "Chem" ]; then
 export WRF_CHEM=1
 export WRF_KPP=1
-# WRF 4.7.1's legacy KPP generator starts four levels below the WRF root.
-sed -i 's#tuv_kpp FIRST ../../inc/#tuv_kpp FIRST ../../../../inc/#' chem/KPP/compile_wkc
 # Avoid repeatedly importing every symbol from all 30 KPP mechanisms.
 # The driver uses only each mechanism's interface; calculation code is unchanged.
 sed -i 's#USE module_kpp_%s_interf #USE module_kpp_%s_interf, ONLY: %s_interface #; /USE module_kpp_%s_interf/s#p2->name );#p2->name, p2->name );#' chem/KPP/util/wkc/gen_kpp_mech_dr.c
@@ -204,6 +202,23 @@ sed -i 's#-L/usr/lib -lnetcdff -lnetcdf#-L/usr/lib/x86_64-linux-gnu -lnetcdff -l
 gfortversion=$(gfortran -dumpversion | cut -d '.' -f 1)
 if [ "$gfortversion" -lt 8 ] && [ "$gfortversion" -ge 6 ]; then
 sed -i '/-DBUILD_RRTMG_FAST=1/d' configure.wrf
+fi
+if [ "$type" = "Chem" ]; then
+    # The 4.8 release archive omits generated Registry files. KPP runs before
+    # the normal WRF Registry step and needs the generated I/O definitions.
+    # Generate only I/O definitions here; other Registry outputs must be made
+    # later with the normal parallel/core flags.
+    cp tools/registry.c tools/registry.c.wrf-install-backup
+    sed -i '/EXIT_ON_NONZERO( gen_io_boilerplate() );/a\  if (getenv("WRF_INSTALL_IO_ONLY")) return 0;' tools/registry.c
+    logsave registry-tools.log make WRF_EM_CORE=1 WRF_NMM_CORE=0 \
+        WRF_DA_CORE=0 WRF_PLUS_CORE=0 WRF_NMM_NEST=0 toolsdir
+    test -x tools/registry
+    logsave registry-prepare.log env WRF_INSTALL_IO_ONLY=1 tools/registry
+    test -s Registry/io_boilerplate_temporary.inc
+    mv tools/registry.c.wrf-install-backup tools/registry.c
+    # Leave the normal WRF compile to build its tools with its own flags.
+    make -C tools clean
+    rm -f tools/registry tools/standard.exe
 fi
 logsave compile.log ./compile -j "$build_jobs" em_real
 if grep -q "Problems building executables, look for errors in the build log" compile.log; then

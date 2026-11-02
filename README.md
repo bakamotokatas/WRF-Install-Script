@@ -5,30 +5,30 @@ WRF Install script will install the WRF and WPS with the needed libraries(netcdf
 
 To run the scripts, you should run the commands below.
 
-For WRF4.7.1 with ARW option(default)
+For WRF4.8.0 with ARW option(default)
 
 ```
-bash WRF4.7.1_Install.bash
+bash WRF4.8.0_Install.bash
 ```
 or
 ```
-bash WRF4.7.1_Install.bash -arw
+bash WRF4.8.0_Install.bash -arw
 ```
 
-For WRF4.7.1 with Chem option (WRF-Chem)
+For WRF4.8.0 with Chem option (WRF-Chem)
 ```
-bash WRF4.7.1_Install.bash -chem
+bash WRF4.8.0_Install.bash -chem
 ```
 
-For WRF4.7.1 with Hydro option (WRF-Hydro)
+For WRF4.8.0 with Hydro option (WRF-Hydro)
 ```
-bash WRF4.7.1_Install.bash -hydro
+bash WRF4.8.0_Install.bash -hydro
 ```
 
 To place the installation on a filesystem with sufficient space, select its build directory:
 
 ```bash
-bash WRF4.7.1_Install.bash -arw --build-dir /tmp/Build_WRF --non-interactive
+bash WRF4.8.0_Install.bash -arw --build-dir /tmp/Build_WRF --non-interactive
 ```
 
 Geography is downloaded and extracted into `WPS_GEOG` under the selected build
@@ -49,13 +49,13 @@ WPS executables.
 To explicitly use two parallel WRF compilation jobs:
 
 ```bash
-bash WRF4.7.1_Install.bash -arw --jobs 2
+bash WRF4.8.0_Install.bash -arw --jobs 2
 ```
 
 To include PREP-CHEM-SRC 1.5 and `convert_emiss.exe` in a Chem installation:
 
 ```bash
-bash WRF4.7.1_Install.bash -chem --with-prep-chem --non-interactive
+bash WRF4.8.0_Install.bash -chem --with-prep-chem --non-interactive
 ```
 
 The converter reuses the completed WRF-Chem libraries. PREP-CHEM-SRC's separate
@@ -78,7 +78,7 @@ require a separate hydrologic test case; `--real-only` checks initialization
 without running a coupled forecast.
 
 ```bash
-bash tests/runtime-smoke.bash /path/to/WRF-4.7.1-ARW /path/to/v431-test-data /path/to/new-wrf-results
+bash tests/runtime-smoke.bash /path/to/WRF-4.8.0-ARW /path/to/v431-test-data /path/to/new-wrf-results
 bash tests/ungrib-smoke.bash /path/to/WPS-4.7.0 /path/to/avn-test-data /path/to/new-ungrib-results
 ```
 
@@ -88,12 +88,13 @@ It then converts the emissions with two MPI processes and verifies that all
 CO and SO2 values are preserved in the WRF NetCDF file:
 
 ```bash
-bash tests/prep-chem-smoke.bash /path/to/PREP-CHEM-SRC-1.5 /path/to/WRF-4.7.1-Chem /path/to/verified-wrf-results /path/to/new-prep-results
+bash tests/prep-chem-smoke.bash /path/to/PREP-CHEM-SRC-1.5 /path/to/WRF-4.8.0-Chem /path/to/verified-wrf-results /path/to/new-prep-results
 ```
 
 Sample data: [WRF real-data case](https://www2.mmm.ucar.edu/wrf/test_data/v431_test_case.tar.gz)
 and [WPS GRIB input](https://www2.mmm.ucar.edu/wrf/src/data/avn_data.tar.gz).
-Validated on Ubuntu 24.04 and 26.04 (x86_64): ARW/Chem/Hydro builds, WPS decoding,
+WRF 4.8.0 with WPS 4.7.0 was validated on Ubuntu 24.04 and 26.04 (x86_64):
+ARW/Chem/Hydro builds, WPS decoding,
 PREP-CHEM-SRC mapping and emissions conversion. Runtime checks
 have the scope described above. Detailed logs and machine-specific recovery
 files are kept outside the repository.

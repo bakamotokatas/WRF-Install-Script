@@ -4,10 +4,11 @@
 # Exercise the installer's actual geography block without network or large files.
 set -euo pipefail
 repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+installer=${1:-"$repo_dir/WRF4.8.0_Install.bash"}
 test_dir=$(mktemp -d)
 trap 'rm -rf "$test_dir"' EXIT
 awk '/^geog_url=/{capture=1} capture && /^#       PREP_CHEM_SRC/{exit} capture {print}' \
-    "$repo_dir/WRF4.7.1_Install.bash" > "$test_dir/geography.bash"
+    "$installer" > "$test_dir/geography.bash"
 
 wget() {
     printf '%s\n' "$*" >> downloads.log
