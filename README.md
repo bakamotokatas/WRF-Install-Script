@@ -29,6 +29,7 @@ bash WRF4.8.0_Install.bash -chem
 For WRF4.8.0 with Hydro option (WRF-Hydro)
 ```
 bash WRF4.8.0_Install.bash -hydro
+```
 
 For WRF4.7.1 with ARW option(default)
 
@@ -48,9 +49,9 @@ bash WRF4.7.1_Install.bash -chem
 For WRF4.7.1 with Hydro option (WRF-Hydro)
 ```
 bash WRF4.7.1_Install.bash -hydro
+```
 
 For WRF4.6.1 with ARW option(default)
-
 ```
 bash WRF4.6.1_Install.bash
 ```
